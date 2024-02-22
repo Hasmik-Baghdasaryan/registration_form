@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="main-title">Registration Form</h1>
+    </header>
+    <main>
+      <form action="#">
+        <section class="form-section" data-bind-id="personal_information">
+          <h2 class="secondary-title">Personal Information</h2>
+          <div class="personal-info-fields grid grid--3-column">
+            <div>
+              <label>Title</label>
+              <select
+                data-bind="options: genderInfo, optionsText: 'gender', optionsValue: 'id', value: selected, optionsCaption: 'Select'">
+              </select>
+            </div>
+            <div>
+              <label for="first-name">First Name</label>
+              <input id="first-name" type="text" placeholder="John"
+                data-bind="value: firstName, valueUpdate: ['afterkeydown', 'keyup']" />
+            </div>
+            <div>
+              <label for="middle-name">Middle Name</label>
+              <input id="middle-name" type="text" placeholder="Q"
+                data-bind="value: middleName, valueUpdate: ['afterkeydown', 'keyup']" />
+            </div>
+            <div>
+              <label for="last-name">Last Name</label>
+              <input id="last-name" type="text" placeholder="Citizen"
+                data-bind="value: lastName, valueUpdate: ['afterkeydown', 'keyup']" />
+            </div>
+          </div>
+        </section>
+        <section class="form-section" data-bind-id="contact_details">
+          <h2 class="secondary-title">Contact Details</h2>
+          <div class="contact-fields grid grid--3-column">
+            <div>
+              <label for="phone">Phone Number</label>
+              <input id="phone" type="text" placeholder="0001111"
+                data-bind="value: phoneNumber, valueUpdate: 'keyup', event: {keypress: isOnlyNumbersEntered.bind(null, event)}" maxlength="9"/>
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="text" placeholder="example@acme.com"
+                data-bind="value: email, valueUpdate: 'afterkeydown'" />
+            </div>
+            <div>
+              <label>Preferred Contact</label>
+              <div class="preferred-checkboxes">
+                <div>
+                  <input type="radio" name="preferred" id="prefered-phone" value="phone" data-bind="checked: contactType" />
+                  <label for="prefered-phone">Phone</label>
+                </div>
+                <div>
+                  <input type="radio" name="preferred" id="prefered-email" value="email" data-bind="checked: contactType" />
+                  <label for="prefered-email">Email</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="form-section" data-bind-id="credit_card">
+          <h2 class="secondary-title">Credit Cards</h2>
+          <div class="credit-cards-block grid">
+            <div class="credit-card-fields hide" data-bind="foreach: userCards, css: {'hide': !userCards().length}">
+              <div>
+                <label for="card-name">Name On Card</label>
+                <input id="card-name" type="text" placeholder="John Citizen" data-bind="value: userName" readonly />
+              </div>
+              <div>
+                <label for="card-number">Card Number</label>
+                <input id="card-number" type="text" placeholder="0000 1111 2222 3333" data-bind="value: userCardNumber" readonly />
+              </div>
+              <div>
+                <label for="card-valid">Valid Thru</label>
+                <input id="card-valid" type="text" placeholder="mm/yy" data-bind="value: userCardValidDate" readonly />
+              </div>
+              <div>
+                <label>Action</label>
+                <button class="btn btn--delete"
+                  data-bind="click: $parent.delete.bind($index), enable: $parent.isDeleteBtnActive()">Delete</button>
+              </div>
+            </div>
+            <!-- ko if: isActive -->
+            <div class="credit-card-fields hide" data-bind="css: {'hide': !isActive}">
+              <div>
+                <label for="card-name">Name On Card</label>
+                <input id="card-name" type="text" placeholder="John Citizen"
+                  data-bind="value: userName, valueUpdate: 'afterkeydown', event: {keypress: isOnlyLettersEntered.bind(null, event)()} " />
+              </div>
+              <div>
+                <label for="card-number">Card Number</label>
+                <input id="card-number" type="text" placeholder="0000 1111 2222 3333"
+                  data-bind="value: cardNumber, valueUpdate: 'afterkeydown', event: {keypress: formatCardNumber.bind(null, event)()}"
+                  maxlength="19" />
+              </div>
+              <div>
+                <label for="card-valid">Valid Thru</label>
+                <input id="card-valid" type="text" placeholder="mm/yy"
+                  data-bind="value: validDate, valueUpdate: 'afterkeydown', event: {keypress: formatDate.bind(null, event)()}"
+                  maxlength="5" />
+              </div>
+              <div>
+                <label>Action</label>
+                <button class="btn btn--delete" disabled>Delete</button>
+              </div>
+            </div>
+            <!-- /ko -->
+          </div>
+          <button class="btn btn-add" data-bind="click: addCreditCard">&#43; Credit Card</button>
+        </section>
+        <section class="form-section" data-bind-id="interests">
+          <h2 class="secondary-title">Interests</h2>
+          <div class="interests" data-bind="foreach: interests">
+            <div>
+              <input data-bind="attr: {id: interest}, value: interest, checked: $parent.choosenInterests" type="checkbox" />
+              <label data-bind="text: interest, attr: {for: interest}"></label>
+            </div>
+          </div>
+        </section>
+        <section class="form-section" data-bind-id="registration_form_btn">
+          <button class="btn btn-submit" type="submit" data-bind="click: submitForm, enable: errors"><span data-bind="text: buttonText()"></span></button>
+          <button class="btn btn-submit" type="button" data-bind="click: resetForm"> Reset</button>
+        </section>
+      </form>
+    </main>
+  </div>
+  <script src="scripts/libs/knockout-3.5.1.js"></script>
+  <script src="scripts/libs/knockout.validation.js"></script>
+  <script src="scripts/commonJs/customFunctions.js"></script>
+  <script src="scripts/commonJs/localStorage.js"></script>
+  <script src="scripts/commonJs/customValidationRulesKO.js"></script>
+  <script src="scripts/viewModels/PersonalInformationViewModel.js"></script>
+  <script src="scripts/viewModels/UserContactInformationViewModel.js"></script>
+  <script src="scripts/viewModels/UserCardsViewModel.js"></script>
+  <script src="scripts/viewModels/UserInterestsViewModel.js"></script>
+  <script src="scripts/app.js"></script>
+</body>
+
+</html>

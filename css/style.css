@@ -1,0 +1,237 @@
+/*
+  Font sizes(px):
+    10 / 12 / 14 / 16 / 18 / 20 / 24 / 30 / 36 / 44 / 52 / 62 / 74 / 86 / 98
+
+  Spacing system (px):
+    2 / 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 / 80 / 96 / 128
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+  font-family: sans-serif;
+}
+
+label {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+}
+
+input,
+select {
+  padding: 0.8rem 1.2rem;
+  color: inherit;
+  font-size: 1.8rem;
+  border-radius: 3px;
+  border: 1px solid #333;
+  outline: none;
+}
+
+input:read-only {
+  opacity: 0.7;
+}
+
+input.koErrorField,
+select.koErrorField {
+  border: 1px solid #e03131;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+
+input[type="radio"] {
+  width: 100%;
+}
+
+#card-valid.koErrorField {
+  margin-bottom: 1rem;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid--3-column {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid--3-column div {
+  position: relative;
+}
+
+.container {
+  width: 110rem;
+  border: 1px solid #aaa;
+  margin: 6.4rem auto;
+  padding: 1.6rem;
+}
+
+.main-title {
+  font-size: 4.4rem;
+  font-weight: 500;
+  color: #333;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 1.6rem;
+}
+
+.secondary-title {
+  font-size: 2.4rem;
+  font-weight: 500;
+}
+
+.form-section {
+  padding: 3.2rem 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.personal-info-fields,
+.contact-fields,
+.credit-card-fields {
+  margin-top: 1.6rem;
+  row-gap: 2.4rem;
+  column-gap: 2.4rem;
+}
+
+.credit-card-fields div {
+  position: relative;
+}
+
+.personal-info-fields select {
+  width: 10%;
+}
+
+.personal-info-fields div:first-child {
+  grid-column: 1 / -1;
+}
+
+.contact-fields div:last-child {
+  grid-row: 2;
+}
+
+.preferred-checkboxes {
+  display: flex;
+  gap: 2.4rem;
+  font-size: 1.4rem;
+}
+
+.preferred-checkboxes div,
+.interests div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  position: relative;
+}
+
+.preferred-checkboxes label,
+.interests label {
+  display: inline-block;
+  font-weight: 500;
+  margin: 0;
+}
+
+.credit-card-fields {
+  display: grid;
+  grid-template-columns: 2fr 2fr 8rem 2fr;
+}
+
+.btn {
+  font-size: 2rem;
+  font-weight: 500;
+  border: none;
+  border-radius: 3px;
+  padding: 1.2rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn--delete {
+  width: 50%;
+  font-size: 1.6rem;
+  background-color: #e03131;
+  align-self: flex-end;
+}
+
+.btn-add {
+  font-size: 1.6rem;
+  background-color: #37b24d;
+  margin-top: 2.2rem;
+}
+
+.btn-submit {
+  background-color: #1c7ed6;
+  padding: 1.2rem 3.2rem;
+}
+
+.btn-submit:disabled {
+  opacity: 0.4;
+}
+
+.btn--delete:hover {
+  background-color: #fa5252;
+}
+
+.btn--delete:disabled {
+  opacity: 0.4;
+}
+
+.btn-add:hover {
+  background-color: #51cf66;
+}
+
+.btn-submit:hover {
+  background-color: #339af0;
+  ;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  color: #333;
+  background-color: #aaa;
+}
+
+.btn--show {
+  display: block;
+}
+
+.interests {
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 1.6rem;
+}
+
+.interests div span.koErrorMessage,
+.preferred-checkboxes div span.koErrorMessage {
+  display: none;
+}
+
+.interests div input.koErrorField {
+  background-color: red;
+}
+.koErrorMessage {
+  color: #e03131;
+  font-size: 1.1rem;
+  font-weight: 700;
+  position: absolute;
+  left: 0.1rem;
+  bottom: -1.3rem;
+}
+
+.errorMessage {
+  color: #e03131;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.hide {
+  display: none;
+}
